@@ -19,7 +19,7 @@ function App() {
       async function fetchTasks() {
         const apiData = await API.graphql({ query: listTasks });
         console.log(apiData)
-        // setNotes(apiData.data.listNotes.items);
+        setTasks(apiData.data.listTasks.items);
       }
     
       async function createTask() {
@@ -38,12 +38,26 @@ function App() {
     <div className="App">
       <header className="App-header">
       <h1>Next Goal</h1>
-                 <input onChange={e => setFormData({ ...formData, 'name': e.target.value})} placeholder="Goal name" value={formData.name}/>
-                 <input onChange={e => setFormData({ ...formData, 'category': e.target.value})} placeholder="Category" value={formData.category}/>
-                 <input onChange={e => setFormData({ ...formData, 'description': e.target.value})} placeholder="Goal description" value={formData.description}/>
-                 <input onChange={e => setFormData({ ...formData, 'due': e.target.value})} placeholder="Due" value={formData.due}/>
+                 <input onChange={e => setFormData({ ...formData, 'name': e.target.value})} placeholder="Goal name" value={formData.name}/><br/>
+                 <input onChange={e => setFormData({ ...formData, 'category': e.target.value})} placeholder="Category" value={formData.category}/><br/>
+                 <input onChange={e => setFormData({ ...formData, 'description': e.target.value})} placeholder="Goal description" value={formData.description}/><br/>
+                 <input onChange={e => setFormData({ ...formData, 'due': e.target.value})} placeholder="Due" value={formData.due}/><br/>
                  <button onClick={createTask}>Create Goal</button>
       </header>
+      <div style={{marginBottom: 30}}>
+        {
+          tasks.map(task => (
+            <div key={task.id || task.name}>
+              <h2>{task.name}</h2>
+              <p>{task.description}</p>
+              <p style={{display: formData.due != "" ? 'block': 'none'}}>
+                {task.due}
+              </p>
+              <button onClick={() => deleteTask(task)}>Delete Goal</button>
+            </div>
+          ))
+        }
+      </div>
       <AmplifySignOut/>
     </div>
   );
