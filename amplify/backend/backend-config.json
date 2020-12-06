@@ -1,0 +1,10 @@
+{
+  "auth": {
+    "nextgoal501a65e3": {
+      "service": "Cognito",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [],
+      "customAuth": false
+    }
+  }
+}
