@@ -53,7 +53,7 @@ function App() {
       <div style={{marginBottom: 30}}>
         {
           tasks.map(task => (
-            <div key={task.id || task.name}>
+            <div key={task.id || task.name} style={{display: task.complete === false ? 'block' : 'none'}}>
               <h2>{task.name}</h2>
               <p>{task.description}</p>
               <p style={{display: formData.due != "" ? 'block': 'none'}}>
