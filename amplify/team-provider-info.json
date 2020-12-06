@@ -1,4 +1,22 @@
 {
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-nextgoal-dev-170318-authRole",
+      "UnauthRoleArn": "arn:aws:iam::709928279128:role/amplify-nextgoal-dev-170318-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::709928279128:role/amplify-nextgoal-dev-170318-authRole",
+      "Region": "us-east-2",
+      "DeploymentBucketName": "amplify-nextgoal-dev-170318-deployment",
+      "UnauthRoleName": "amplify-nextgoal-dev-170318-unauthRole",
+      "StackName": "amplify-nextgoal-dev-170318",
+      "StackId": "arn:aws:cloudformation:us-east-2:709928279128:stack/amplify-nextgoal-dev-170318/f0c510d0-37e4-11eb-943d-0222f7aec498",
+      "AmplifyAppId": "d2oz9fbqegbteu"
+    },
+    "categories": {
+      "auth": {
+        "nextgoal501a65e3": {}
+      }
+    }
+  },
   "staging": {
     "awscloudformation": {
       "AuthRoleName": "amplify-nextgoal-staging-162905-authRole",

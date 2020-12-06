@@ -1,0 +1,8 @@
+type Task @model {
+  id: ID!
+  name: String!
+  category: String!
+  description: String
+  due: String 
+  complete: Boolean!
+}
