@@ -11,11 +11,17 @@ const initialFormState = { name: '', category: '', description: '', due: '', com
 function App() {
     const [tasks, setTasks] = useState([]);
     const [formData, setFormData] = useState(initialFormState);
+    const [goalStatus, setGoalStatus] = useState(initialFormState.complete)
 
     useEffect(() => {
         fetchTasks();
       }, []);
     
+      function markComplete(){
+        setGoalStatus(true)
+      }
+
+
       async function fetchTasks() {
         const apiData = await API.graphql({ query: listTasks });
         console.log(apiData)
@@ -53,6 +59,7 @@ function App() {
               <p style={{display: formData.due != "" ? 'block': 'none'}}>
                 {task.due}
               </p>
+              <button onClick={() => markComplete()}>Goal completed!</button>
               <button onClick={() => deleteTask(task)}>Delete Goal</button>
             </div>
           ))
