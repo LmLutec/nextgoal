@@ -37,13 +37,13 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-      </header>
       <h1>Next Goal</h1>
                  <input onChange={e => setFormData({ ...formData, 'name': e.target.value})} placeholder="Goal name" value={formData.name}/>
                  <input onChange={e => setFormData({ ...formData, 'category': e.target.value})} placeholder="Category" value={formData.category}/>
                  <input onChange={e => setFormData({ ...formData, 'description': e.target.value})} placeholder="Goal description" value={formData.description}/>
                  <input onChange={e => setFormData({ ...formData, 'due': e.target.value})} placeholder="Due" value={formData.due}/>
                  <button onClick={createTask}>Create Goal</button>
+      </header>
       <AmplifySignOut/>
     </div>
   );
