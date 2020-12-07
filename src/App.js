@@ -38,7 +38,7 @@ function App() {
         const newTasksArray = tasks.filter(task => task.id !== id);
         setGoalStatus(true)
         setTasks(newTasksArray)
-        const apiData = await API.graphql({ query: updateTaskMutation, variables: { input: { goalStatus } }});
+        const apiData = await API.graphql({ query: updateTaskMutation});
         console.log(apiData)
       }
 
