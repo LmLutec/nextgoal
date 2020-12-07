@@ -34,13 +34,13 @@ function App() {
       //   }
       // }
     
-      function markComplete(task){
-        const newTasksArray = tasks.filter(task => task.id !== id);
-        setGoalStatus(true)
-        setTasks(newTasksArray)
-        const apiData = await API.graphql({ query: updateTaskMutation});
-        console.log(apiData)
-      }
+      // function markComplete(task){
+      //   const newTasksArray = tasks.filter(task => task.id !== id);
+      //   setGoalStatus(true)
+      //   setTasks(newTasksArray)
+      //   const apiData = await API.graphql({ query: updateTaskMutation});
+      //   console.log(apiData)
+      // }
 
 
       async function fetchTasks() {
