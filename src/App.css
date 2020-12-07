@@ -15,13 +15,26 @@
 
 .App-header {
   background-color: #282c34;
-  min-height: 100vh;
+  min-height: 70vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
+}
+
+#next_goal {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  /* font-size: calc(10px + 2vmin); */
+}
+
+.goallist {
+  float: left;
+  padding: 60px;
 }
 
 .App-link {

@@ -16,31 +16,25 @@ function App() {
     useEffect(() => {
         fetchTasks();
       }, []);
-
-
-      // mutation UpdateTask(
-      //   $input: UpdateTaskInput!
-      //   $condition: ModelTaskConditionInput
-      // ) {
-      //   updateTask(input: $input, condition: $condition) {
-      //     id
-      //     name
-      //     category
-      //     description
-      //     due
-      //     complete
-      //     createdAt
-      //     updatedAt
-      //   }
-      // }
     
-      // function markComplete(task){
-      //   const newTasksArray = tasks.filter(task => task.id !== id);
-      //   setGoalStatus(true)
-      //   setTasks(newTasksArray)
-      //   const apiData = await API.graphql({ query: updateTaskMutation});
-      //   console.log(apiData)
-      // }
+      async function markComplete(task){
+        const completeObj = {
+          id: task.id,
+          name: task.name,
+          category: task.category,
+          description: task.description,
+          due: task.due,
+          complete: true 
+        }
+
+        try {
+        setGoalStatus(true)
+        const apiData = await API.graphql({ query: updateTaskMutation, variables: { input: completeObj }});
+        }
+        catch (error) {
+          console.log(error)
+        }
+      }
 
 
       async function fetchTasks() {
@@ -63,28 +57,28 @@ function App() {
       }
   return (
     <div className="App">
-      <header className="App-header">
-      <h1>Next Goal</h1>
-                 <input onChange={e => setFormData({ ...formData, 'name': e.target.value})} placeholder="Goal name" value={formData.name}/><br/>
-                 <input onChange={e => setFormData({ ...formData, 'category': e.target.value})} placeholder="Category" value={formData.category}/><br/>
-                 <input onChange={e => setFormData({ ...formData, 'description': e.target.value})} placeholder="Goal description" value={formData.description}/><br/>
-                 <input onChange={e => setFormData({ ...formData, 'due': e.target.value})} placeholder="Due" value={formData.due}/><br/>
-                 <button onClick={createTask}>Create Goal</button>
+      <header className="App-header" id="next_goal">
+        <h1>Next Goal</h1>
+                  <input onChange={e => setFormData({ ...formData, 'name': e.target.value})} placeholder="Goal name" value={formData.name}/><br/>
+                  <input onChange={e => setFormData({ ...formData, 'category': e.target.value})} placeholder="Category" value={formData.category}/><br/>
+                  <input onChange={e => setFormData({ ...formData, 'description': e.target.value})} placeholder="Goal description" value={formData.description}/><br/>
+                  <input onChange={e => setFormData({ ...formData, 'due': e.target.value})} placeholder="Due" value={formData.due}/><br/>
+                  <button onClick={createTask}>Create Goal</button>
       </header>
-      <div style={{marginBottom: 30}}>
+      <div style={{marginBottom: 80}} >
         {
-          tasks.map(task => (
-            <div key={task.id || task.name} style={{display: task.complete === false ? 'block' : 'none'}}>
-              <h2>{task.name}</h2>
-              <p>{task.description}</p>
-              <p style={{display: formData.due != "" ? 'block': 'none'}}>
-                {task.due}
-              </p>
-              <button onClick={() => markComplete(task)}>Goal completed!</button><br/>
-              <button onClick={() => deleteTask(task)}>Delete Goal</button>
-            </div>
-          ))
-        }
+            tasks.map(task => (
+              <div key={task.id || task.name} style={{display: task.complete === false ? 'block' : 'none'}} className="goallist">
+                <h2>{task.name}</h2>
+                <p>{task.description}</p>
+                <p style={{display: formData.due !== "" ? 'block': 'none'}}>
+                  {task.due}
+                </p>
+                <button onClick={() => markComplete(task)}>Goal completed!</button><br/><br/>
+                <button onClick={() => deleteTask(task)}>Delete Goal</button>
+              </div>
+            ))
+          }
       </div>
       <AmplifySignOut/>
     </div>
