@@ -2,7 +2,7 @@ import './App.css';
 import { withAuthenticator, AmplifySignOut } from '@aws-amplify/ui-react'
 import { API } from 'aws-amplify';
 import { listTasks } from './graphql/queries';
-import { createTask as createTaskMutation, deleteTask as deleteTaskMutation } from './graphql/mutations';
+import { createTask as createTaskMutation, updateTask as updateTaskMutation, deleteTask as deleteTaskMutation } from './graphql/mutations';
 import React, { useState, useEffect } from 'react';
 
 const initialFormState = { name: '', category: '', description: '', due: '', complete: false }
@@ -16,9 +16,30 @@ function App() {
     useEffect(() => {
         fetchTasks();
       }, []);
+
+
+      // mutation UpdateTask(
+      //   $input: UpdateTaskInput!
+      //   $condition: ModelTaskConditionInput
+      // ) {
+      //   updateTask(input: $input, condition: $condition) {
+      //     id
+      //     name
+      //     category
+      //     description
+      //     due
+      //     complete
+      //     createdAt
+      //     updatedAt
+      //   }
+      // }
     
-      function markComplete(){
+      function markComplete(task){
+        const newTasksArray = tasks.filter(task => task.id !== id);
         setGoalStatus(true)
+        setTasks(newTasksArray)
+        const apiData = await API.graphql({ query: updateTaskMutation, variables: { input: { goalStatus } }});
+        console.log(apiData)
       }
 
 
@@ -59,7 +80,7 @@ function App() {
               <p style={{display: formData.due != "" ? 'block': 'none'}}>
                 {task.due}
               </p>
-              <button onClick={() => markComplete()}>Goal completed!</button>
+              <button onClick={() => markComplete(task)}>Goal completed!</button><br/>
               <button onClick={() => deleteTask(task)}>Delete Goal</button>
             </div>
           ))
