@@ -90,7 +90,7 @@ function App() {
                   {task.due}
                 </p>
                 <button onClick={() => markComplete(task)} className= "btn btn-block btn-primary fas fa-thumbs-up">Goal completed!</button><br/><br/>
-                <Button type="button" variant="primary" className="btn btn-warning">Primary</Button>
+                <button type="button" variant="primary" className="btn btn-warning">Primary</button>
                 <button onClick={() => deleteTask(task)}>Delete Goal</button>
               </div>
             ))
