@@ -5,7 +5,7 @@ import { listTasks } from './graphql/queries';
 import { createTask as createTaskMutation, updateTask as updateTaskMutation, deleteTask as deleteTaskMutation } from './graphql/mutations';
 import React, { useState, useEffect } from 'react';
 import Select from "react-dropdown-select";
-
+import Button from 'react-bootstrap/Button';
 
 // use bootstrap to style buttons
 const initialFormState = { name: '', category: '', description: '', due: '', complete: false }
@@ -22,6 +22,7 @@ function App() {
       { value: 'School', label: 'School' },
       { value: 'Workout', label: 'Workout' },
       { value: 'Shopping/Need to buy', label: 'Shopping/Need to buy' },
+      { value: 'Around the house', label: 'Around the house' },
       { value: 'Appointment', label: 'Appointment' }
     ]
 
@@ -67,13 +68,13 @@ function App() {
         setTasks(newTasksArray);
         await API.graphql({ query: deleteTaskMutation, variables: { input: { id } }});
       }
+
   return (
     <div className="App">
       <header className="App-header" id="next_goal">
         <h1>Next Goal</h1>
                   <input onChange={e => setFormData({ ...formData, 'name': e.target.value})} placeholder="Goal name" value={formData.name}/><br/>
-                  <Select options={options} onChange={e => setFormData({ ...formData, 'category': e.traget.value})} value={formData.category} /><br/>
-                  {/* <input onChange={e => setFormData({ ...formData, 'category': e.target.value})} placeholder="Category" value={formData.category}/><br/> */}
+                  <Select onChange={e => setFormData({ ...formData, 'category': e[0].value}) } options={options} value={formData.category} /><br/>
                   <input onChange={e => setFormData({ ...formData, 'description': e.target.value})} placeholder="Goal description" value={formData.description}/><br/>
                   <input onChange={e => setFormData({ ...formData, 'due': e.target.value})} placeholder="Due" value={formData.due}/><br/>
                   <button onClick={createTask}>Create Goal</button>
@@ -88,7 +89,8 @@ function App() {
                 <p style={{display: formData.due !== "" ? 'block': 'none'}}>
                   {task.due}
                 </p>
-                <button onClick={() => markComplete(task)}>Goal completed!</button><br/><br/>
+                <button onClick={() => markComplete(task)} className= "btn btn-block btn-primary fas fa-thumbs-up">Goal completed!</button><br/><br/>
+                <Button variant="primary" className="btn-primary">Primary</Button>
                 <button onClick={() => deleteTask(task)}>Delete Goal</button>
               </div>
             ))
