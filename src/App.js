@@ -5,7 +5,6 @@ import { listTasks } from './graphql/queries';
 import { createTask as createTaskMutation, updateTask as updateTaskMutation, deleteTask as deleteTaskMutation } from './graphql/mutations';
 import React, { useState, useEffect } from 'react';
 import Select from "react-dropdown-select";
-import Button from 'react-bootstrap/Button';
 
 // use bootstrap to style buttons
 const initialFormState = { name: '', category: '', description: '', due: '', complete: false }
